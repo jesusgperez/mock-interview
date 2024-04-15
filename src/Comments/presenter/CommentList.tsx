@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { CommentsDto } from "../infrastructure/models/comments.dto";
 import { Comment } from "./Comment";
 import axios from "axios";
+import { LikeImg } from "./LikeImg";
+
 
 const CommentList = () => {
-  const [ comments, setComments ] = useState<CommentsDto[]>([])
+  const [ comments, setComments ] = useState<CommentsDto[]>([]) 
+  const [ likes, setLikes ] = useState(new Map<number, boolean>())
 
   useEffect(() => {
     const apiCall = async () => {
@@ -13,7 +16,16 @@ const CommentList = () => {
     }
 
     apiCall()
-  } ,[])
+  }, [])
+
+  const setLike = (id: number) => {
+    if (! likes.get(id)) {
+      setLikes(new Map(likes.set(id, true)))
+      return
+    }
+
+    setLikes(new Map(likes.set(id, false)))
+  }
 
   return (
     <ul>
@@ -21,6 +33,14 @@ const CommentList = () => {
       return (
         <li>
           <Comment body={comment.body} />
+          <button
+            onClick={() => setLike(comment.id)}
+          >
+            {
+              !!likes.get(comment.id) ? 
+              <LikeImg src="like.png" /> : <LikeImg src="empty_like.jpg" />
+            }
+          </button>
         </li>
       )
     })}
