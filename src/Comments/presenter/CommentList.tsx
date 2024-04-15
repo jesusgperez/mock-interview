@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { CommentsDto } from "../infrastructure/models/comments.dto";
 import { Comment } from "./Comment";
 import axios from "axios";
-import { LikeImg } from "./LikeImg";
 
 
 const CommentList = () => {
@@ -28,20 +27,22 @@ const CommentList = () => {
   }
 
   return (
-    <ul>
-    {comments.map((comment) => {
-      return (
-        <li>
-          <Comment 
-            id={comment.id}
-            body={comment.body}
-            hasLike={!!likes.get(comment.id)}
-            onClick={() => setLike(comment.id)}
-          />
-        </li>
-      )
-    })}
-    </ul>
+    <div className="flex flex-row items-center">
+      <ul className="basis-full">
+      {comments.map((comment) => {
+        return (
+          <li>
+            <Comment 
+              id={comment.id}
+              body={comment.body}
+              hasLike={!!likes.get(comment.id)}
+              onClick={() => setLike(comment.id)}
+              />
+          </li>
+        )
+      })}
+      </ul>
+    </div>
   )
 }
 
