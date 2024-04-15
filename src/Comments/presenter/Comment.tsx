@@ -8,10 +8,10 @@ const Comment = (props: CommentProps) => {
         { props.body }
       </p>
       <button
-        onClick={() => props.setLike(props.id)}
+        onClick={props.onClick}
       >
         {
-          !!props.likes.get(props.id) ? 
+          props.hasLike ? 
           <LikeImg src="like.png" /> : <LikeImg src="empty_like.jpg" />
         }
       </button>

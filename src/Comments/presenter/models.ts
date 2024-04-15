@@ -1,8 +1,8 @@
 export type CommentProps = {
   id: number,
   body: string,
-  likes: Map<number, boolean>,
-  setLike: (id: number) => void
+  hasLike: boolean,
+  onClick: () => void
 }
 
 export type LikeImgProps = {

@@ -35,8 +35,8 @@ const CommentList = () => {
           <Comment 
             id={comment.id}
             body={comment.body}
-            likes={likes}
-            setLike={(id) => setLike(id)}
+            hasLike={!!likes.get(comment.id)}
+            onClick={() => setLike(comment.id)}
           />
         </li>
       )
