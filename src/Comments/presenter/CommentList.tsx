@@ -16,7 +16,7 @@ const CommentList = () => {
     }
 
     apiCall()
-  }, [])
+  }, [])  
 
   const setLike = (id: number) => {
     if (! likes.get(id)) {
@@ -32,15 +32,12 @@ const CommentList = () => {
     {comments.map((comment) => {
       return (
         <li>
-          <Comment body={comment.body} />
-          <button
-            onClick={() => setLike(comment.id)}
-          >
-            {
-              !!likes.get(comment.id) ? 
-              <LikeImg src="like.png" /> : <LikeImg src="empty_like.jpg" />
-            }
-          </button>
+          <Comment 
+            id={comment.id}
+            body={comment.body}
+            likes={likes}
+            setLike={(id) => setLike(id)}
+          />
         </li>
       )
     })}
